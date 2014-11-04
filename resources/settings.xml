@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+	<category label="General">
+		<setting label="URL" type="text" id="url_address" default="http://www.nyaa.se"/>
+		<setting label="Quality" type="lsep"/>
+		<setting label="Anime Quality" type="labelenum" id="anime_quality" values="480p|HDTV|720p|1080p|DVD|ALL" default="720p"/>
+		<setting label="Category" type="lsep"/>
+		<setting label="Category" type="labelenum" id="category" values="ALL|English translations|Non English translations|Raw" default="English translations"/>
+		<setting label="Extra information" type="lsep"/>
+		<setting label="extra search (ex. language)" type="text" id="extra" default=""/>
+		<setting label="Files to download" type="lsep"/>
+		<setting label="Max torrents" type="slider" id="max_magnets" default="10" range="1,1,100" option="int" />
+	</category>
+</settings>

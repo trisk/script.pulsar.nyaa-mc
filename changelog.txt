@@ -1,0 +1,9 @@
+Version 1.2
+Icon
+
+Version 1.1
+Fix when it is only one torrent available
+
+Version 1.0
+
+first version
