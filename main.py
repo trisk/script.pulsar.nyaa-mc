@@ -105,7 +105,7 @@ def extract_torrents(data):
 				if included(name[cm][1], quality_allow) and not included(name[cm][1], quality_deny) and size_clearance(size[cm]):
 					yield { "name": name[cm][1] + ' - ' + size[cm] + ' - ' + name_provider,"uri": url + '/?page=download&tid=' + torrent}
 				else:
-					provider.log.info(name[cm][1] + ' - ' + size[cm] + '   ***Not Included for keyword filtering or size***')
+					provider.log.warning(name[cm][1] + ' - ' + size[cm] + '   ***Not Included for keyword filtering or size***')
 				if (cm == max_magnets): #limit magnets
 					break
 			else:
@@ -114,7 +114,7 @@ def extract_torrents(data):
 				yield { "name": name,"uri": url + '?page=download&tid=' + torrent}
 				break
 	except:
-		provider.log.info('>>>>>>>ERROR parsing data<<<<<<<')
+		provider.log.error('>>>>>>>ERROR parsing data<<<<<<<')
 
 def search(info):
 	query = info['query'] + extra
