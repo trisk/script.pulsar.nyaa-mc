@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.pulsar.nyaa" name="Pulsar Nyaa Provider" version="1.95" provider-name="mancuniancol">
+<addon id="script.pulsar.nyaa" name="Pulsar Nyaa Provider" version="1.96" provider-name="mancuniancol">
 	<requires>
 		<import addon="xbmc.python" version="2.12.0"/>
         <import addon="plugin.video.pulsar" version="0.2"/>

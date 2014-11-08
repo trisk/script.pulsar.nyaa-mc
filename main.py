@@ -45,13 +45,15 @@ anime_allow.append('BRRip') if anime_q9 == 'true' else anime_deny.append('BRRip'
 anime_allow.append('HDRip') if anime_q10 == 'true' else anime_deny.append('HDRip')
 anime_allow.append('x264') if anime_q12 == 'true' else anime_deny.append('x264')
 anime_allow.append('HEVC') if anime_q15 == 'true' else anime_deny.append('HEVC')
+if '' in anime_allow: anime_allow.remove('')
+if '' in anime_deny: anime_deny.remove('') 
 
 # validate keywords
 def included(value, keys):
 	value = value.replace('-',' ')
 	res = False
 	for item in keys:
-		if item.upper() in value.upper() and item != '':
+		if item.upper() in value.upper():
 			res = True 
 			break
 	return res
@@ -98,6 +100,10 @@ def extract_torrents(data):
 	try:
 		name = re.findall(r'/.page=view&#..;tid=(.*?)>(.*?)</a></td>',data) # find all names
 		size = re.findall(r'<td class="tlistsize">(.*?)</td>',data) # find all sizes
+		provider.log.info('Keywords allowed: ' + str(quality_allow))
+		provider.log.info('Keywords denied: ' + str(quality_deny))
+		provider.log.info('min Size: ' + str(min_size) + ' GB')
+		provider.log.info('max Size: ' + str(max_size)  + ' GB' if max_size != 10 else 'max Size: MAX')
 		cm = 0
 		for cm, torrent in enumerate(re.findall(r'/.page=download&#..;tid=(.*?)"', data)):
 			#find name in the torrent
@@ -120,8 +126,14 @@ def search(info):
 	query = info['query'] + extra
 	provider.notify(message="Searching: " + query + '...', header=None, time=1000, image=icon)
 	query = provider.quote_plus(query)
+	provider.log.info("%s/?page=search&cats=%s&term=%s&sort=2" % (url,category,query))
 	response = provider.GET("%s/?page=search&cats=%s&term=%s&sort=2" % (url,category,query))
-	return extract_torrents(response.data)
+	if response == (None, None):
+		provider.log.error('404 Page not found')
+		return []
+	else:
+		return extract_torrents(response.data)
+
 
 def search_movie(info):
 	return []
