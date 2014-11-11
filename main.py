@@ -125,9 +125,9 @@ def extract_torrents(data):
 def search(info):
 	query = info['query'] + extra
 	provider.notify(message="Searching: " + query.title() + '...', header=None, time=1000, image=icon)
-	query = provider.quote_plus(query)
-	provider.log.info("%s/?page=search&cats=%s&term=%s&sort=2" % (url,category,query))
-	response = provider.GET("%s/?page=search&cats=%s&term=%s&sort=2" % (url,category,query))
+	url_search = "%s/?page=search&cats=%s&term=%s&sort=2" % (url,category,provider.quote_plus(query))
+	provider.log.info(url_search)
+	response = provider.GET(url_search)
 	if response == (None, None):
 		provider.log.error('404 Page not found')
 		return []
