@@ -1,15 +1,26 @@
-Version 1.98
-Bugfix
+Version 2.1.5
+Sorted Code
 
-Version 1.95
-Size limitation
+Version 2.1.1
+Fixbug
 
-Version 1.2
-Icon
+Version 2.1.0
+New Filtering
 
-Version 1.1
-Fix when it is only one torrent available
+Version 2.0.4
+Fixbug
 
-Version 1.0
+Version 2.0.3
+Clean title
 
-first version
+Version 2.0.2
+Fixbug
+
+Version 2.0.1
+Update
+
+Version 2.0.0
+Update with absolute_episode payload
+
+Version 2.0.0
+Ready for Pulsar 0.3

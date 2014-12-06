@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.pulsar.nyaa" name="Pulsar Nyaa Provider" version="1.98" provider-name="mancuniancol">
+<addon id="script.pulsar.nyaa-mc" name="Pulsar MC's Nyaa (Anime only) Provider" version="2.1.5" provider-name="mancuniancol">
 	<requires>
 		<import addon="xbmc.python" version="2.12.0"/>
-        <import addon="plugin.video.pulsar" version="0.2"/>
+        <import addon="plugin.video.pulsar" version="0.3.1"/>
 	</requires>
 	<extension point="xbmc.python.script" library="main.py">
 		<provides>executable</provides>
@@ -13,7 +13,7 @@
 		<language></language>
 		<platform>all</platform>
 		<forum>http://forum.xbmc.org/showthread.php?tid=204728</forum>
-		<disclaimer lang="en">It only works with Pulsar 0.2![CR]It is just for educational purpose[CR]Check if it is illegal in your country to use.</disclaimer>
+		<disclaimer lang="en">It only works with Pulsar 0.3.1![CR]It is just for educational purpose[CR]Check if it is illegal in your country to use.</disclaimer>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
 	</extension>
 </addon>

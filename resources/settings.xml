@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="General">
-		<setting label="URL address:" type="text" id="url_address" default="http://www.nyaa.se"/>
+		<setting label="URL address (http://example.com):" type="text" id="url_address" default="http://www.nyaa.se"/>
 		<setting label="Category" type="lsep"/>
 		<setting label="Category:" type="labelenum" id="category" values="ALL|English translations|Non English translations|Raw" default="English translations"/>
-		<setting label="Extra Information for the Search" type="lsep"/>
-		<setting label="Extra words for the query:" type="text" id="extra" default=""/>
+		<setting label="Extra Keywords to send in the URL" type="lsep"/>
+		<setting label="Extra Keywords:" type="text" id="extra" default=""/>
+		<setting label="Notification Message" type="lsep"/>
+		<setting label="Time (miliseconds):" type="slider" id="time_noti" default="1500" range="0,125,2000" option="int" />
 	</category>
-	<category label="Anime Quality">
-		<setting label="480p" type="bool" id="anime_q1" default="false"/>
-		<setting label="DVD" type="bool" id="anime_q2" default="false"/>
-		<setting label="HDTV" type="bool" id="anime_q3" default="true"/>
-		<setting label="720p" type="bool" id="anime_q4" default="true"/>
-		<setting label="1080p" type="bool" id="anime_q5" default="false"/>
-		<setting label="WEB" type="bool" id="anime_q7" default="true"/>
-		<setting label="Bluray" type="bool" id="anime_q8" default="true"/>
-		<setting label="BRRip" type="bool" id="anime_q9" default="true"/>
-		<setting label="HDRip" type="bool" id="anime_q10" default="true"/>		
-		<setting label="x264" type="bool" id="anime_q12" default="true"/>
-		<setting label="HEVC" type="bool" id="anime_q15" default="true"/>
+	<category label="Anime Filters">
+		<setting label="Advance Setup (for 'AND' use space, for 'OR' use comma)" type="lsep"/>
+		<setting label="Accept File with:" type="text" id="TV_key_allowed" default=""/>
+		<setting label="Block File with:" type="text" id="TV_key_denied" default=""/>
+		<setting label="Easy Setup Keywords after the query" type="lsep"/>
+		<setting label="480p" type="labelenum" id="TV_qua1" values="Accept File|Block File|Filter Off" default="Filter Off"/>
+		<setting label="HDTV" type="labelenum" id="TV_qua2" values="Accept File|Block File|Filter Off" default="Accept File"/>
+		<setting label="720p" type="labelenum" id="TV_qua3" values="Accept File|Block File|Filter Off" default="Accept File"/>
+		<setting label="1080p" type="labelenum" id="TV_qua4" values="Accept File|Block File|Filter Off" default="Accept File"/>
 	</category>
-	<category label="Files to Download">
+	<category label="Download Settings">
 		<setting label="Maximum Torrents to Send to Pulsar:" type="slider" id="max_magnets" default="10" range="0,1,20" option="int" />
 		<setting label="Limitation Size Anime Files" type="lsep"/>
-		<setting label="Minimum Size in GB (0 = Not Limit):" type="slider" id="anime_min_size" default="0" range="0,0.25,10" option="float" />
-		<setting label="Maximum Size in GB (10 = Not Limit):" type="slider" id="anime_max_size" default="10" range="0,0.25,10" option="float" />
+		<setting label="Minimum Size in GB (0 = Block Filet Limit):" type="slider" id="TV_min_size" default="0" range="0,0.25,10" option="float" />
+		<setting label="Maximum Size in GB (10 = Block Filet Limit):" type="slider" id="TV_max_size" default="10" range="0,0.25,10" option="float" />
 	</category>
 </settings>
