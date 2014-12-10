@@ -37,6 +37,7 @@ def extract_torrents(data):
         provider.log.info('>>>>>>' + str(cont) + ' torrents sent to Pulsar<<<<<<<')
     except:
         provider.log.error('>>>>>>>ERROR parsing data<<<<<<<')
+        provider.notify(message='ERROR parsing data', header=None, time=5000, image=settings.icon)
 
 
 def search(query):
@@ -50,7 +51,8 @@ def search(query):
     if browser.open(url_search):
         results = extract_torrents(browser.content)
     else:
-        print browser.status
+        provider.log.error('>>>>>>>%s<<<<<<<' % browser.status)
+        provider.notify(message=browser.status, header=None, time=5000, image=settings.icon)
         results = []
     return results
 
