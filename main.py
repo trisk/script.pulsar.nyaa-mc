@@ -1,8 +1,8 @@
 # coding: utf-8
 from pulsar import provider
-from urllib import unquote_plus
 import re
 import common
+from itertools import chain
 
 # this read the settings
 settings = common.Settings()
@@ -40,13 +40,26 @@ def extract_torrents(data):
         provider.notify(message='ERROR parsing data', header=None, time=5000, image=settings.icon)
 
 
+def get_titles(title, tvdb_id):
+    url_tvdb = "http://www.thetvdb.com/api/GetSeries.php?seriesname=%s" % provider.quote_plus(title)
+    provider.log.info(url_tvdb)
+    if browser.open(url_tvdb):
+        pat = re.compile('<seriesid>%d</seriesid>.*?<AliasNames>(.*?)</AliasNames>' % tvdb_id, re.I | re.S)
+        show = pat.search(browser.content) # find all aliases
+        if show:
+            aliases = show.group(1).strip()
+            provider.log.info("Aliases: " + aliases)
+            return [ title ] + aliases.split('|')
+    return [ title ]		
+
+
 def search(query):
     global filters
     filters.title = query  # to do filtering by name
     query += ' ' + settings.extra
     if settings.time_noti > 0: provider.notify(message="Searching: " + query.title() + '...', header=None, time=settings.time_noti, image=settings.icon)
     query = provider.quote_plus(query.rstrip())
-    url_search = "%s/?page=search&cats=%s&term=%s&sort=2" % (settings.url,category,provider.quote_plus(query))  # change in each provider
+    url_search = "%s/?page=search&cats=%s&term=%s&sort=2" % (settings.url, category, query)  # change in each provider
     provider.log.info(url_search)
     if browser.open(url_search):
         results = extract_torrents(browser.content)
@@ -62,12 +75,13 @@ def search_movie(info):
 
 
 def search_episode(info):
+    iters = []
     filters.use_TV()
-    query = common.clean(info['title']) + ' %02d' % info['absolute_number']  # define query
-    results = []
-    if info['absolute_number'] != 0:
-        results = search(query)
-    return results
+    titles = get_titles(info['title'], info['tvdb_id'])
+    for title in titles:
+        query = common.clean(title) + ' %02d' % info['absolute_number']
+        iters.append(search(query))
+    return chain.from_iterable(iters)
 
 # This registers your module for use
 provider.register(search, search_movie, search_episode)
