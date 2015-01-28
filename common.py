@@ -187,7 +187,7 @@ class Filtering:
         for a in word:
             if ord(a) < 128:
                 value += chr(ord(a))
-        value = value.replace('-', ' ').replace('&ntilde;', '')
+	value = value.replace('-', ' ').replace('_', ' ').replace(':', ' ').replace('&ntilde;', '')
         return value
 
     # validate keywords
