@@ -41,9 +41,6 @@ class Browser:
             req = urllib2.Request(url)
         req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36')
         req.add_header("Accept-Encoding", "gzip")
-        req.add_header('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-        req.add_header('Cache-Control', 'max-age=0')
-        req.add_header('Connection', 'keep-alive')
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cookies))#open cookie jar
         try:
             response = opener.open(req)  # send cookies and open url
@@ -187,7 +184,7 @@ class Filtering:
         for a in word:
             if ord(a) < 128:
                 value += chr(ord(a))
-	value = value.replace('-', ' ').replace('_', ' ').replace(':', ' ').replace('&ntilde;', '')
+        value = value.replace('-', ' ').replace('&ntilde;', '')
         return value
 
     # validate keywords

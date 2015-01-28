@@ -22,7 +22,7 @@
 	<category label="Download Settings">
 		<setting label="Maximum Torrents to Send to Pulsar:" type="slider" id="max_magnets" default="10" range="0,1,20" option="int" />
 		<setting label="Limitation Size Anime Files" type="lsep"/>
-		<setting label="Minimum Size in GB (0 = Block Filet Limit):" type="slider" id="TV_min_size" default="0" range="0,0.25,10" option="float" />
-		<setting label="Maximum Size in GB (10 = Block Filet Limit):" type="slider" id="TV_max_size" default="10" range="0,0.25,10" option="float" />
+		<setting label="Minimum Size in GB (0 = Filter OFF):" type="slider" id="TV_min_size" default="0" range="0,0.25,10" option="float" />
+		<setting label="Maximum Size in GB (10 = Filter OFF):" type="slider" id="TV_max_size" default="10" range="0,0.25,10" option="float" />
 	</category>
 </settings>
