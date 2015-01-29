@@ -3,6 +3,7 @@ from pulsar import provider
 import re
 import common
 from itertools import chain
+from multiprocessing import Pool
 
 # this read the settings
 settings = common.Settings()
@@ -41,6 +42,7 @@ def extract_torrents(data):
 
 
 def get_titles(title, tvdb_id):
+    titles = [title]
     url_tvdb = "http://www.thetvdb.com/api/GetSeries.php?seriesname=%s" % provider.quote_plus(title)
     provider.log.info(url_tvdb)
     if browser.open(url_tvdb):
@@ -49,8 +51,8 @@ def get_titles(title, tvdb_id):
         if show:
             aliases = show.group(1).strip()
             provider.log.info("Aliases: " + aliases)
-            return [ title ] + aliases.split('|')
-    return [ title ]		
+            titles += aliases.split('|')
+    return titles
 
 
 def search(query):
@@ -70,18 +72,24 @@ def search(query):
     return results
 
 
+def map_search(query):
+    # convert to list while running generators in subprocess
+    return list(search(query))
+
+
 def search_movie(info):
     return []
 
 
 def search_episode(info):
-    iters = []
     filters.use_TV()
     titles = get_titles(info['title'], info['tvdb_id'])
-    for title in titles:
-        query = common.clean(title) + ' %02d' % info['absolute_number']
-        iters.append(search(query))
-    return chain.from_iterable(iters)
+    queries = [ (common.clean(t) + ' %02d' % info['absolute_number']) for t in titles ]
+    # parallel searches
+    pool = Pool(len(queries))
+    results = pool.map(map_search, queries)
+    pool.close()
+    return chain.from_iterable(results)
 
 # This registers your module for use
 provider.register(search, search_movie, search_episode)
